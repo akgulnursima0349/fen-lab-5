@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Sınıf - Süblimleşme ve Kırağılaşma Deneyi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* Reset ve Temel Stiller */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Stilleri */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .header h1 i {
+            color: #3498db;
+            margin-right: 15px;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(52, 152, 219, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+            width: 14.28%;
+        }
+
+        .step-info {
+            color: #7f8c8d;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Step Content */
+        .step-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .step-header h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .step-header h2 i {
+            color: #3498db;
+            margin-right: 10px;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Materials Grid */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .material-item {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .material-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .material-item i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Safety Rules */
+        .safety-rules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .safety-item {
+            background: linear-gradient(135deg, #ff7675, #d63031);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .safety-item i {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .safety-check {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .safety-check label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Hypothesis Section */
+        .hypothesis-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .hypothesis-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .hypothesis-options label {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hypothesis-options label:hover {
+            border-color: #3498db;
+            background: #f0f8ff;
+        }
+
+        .hypothesis-options input[type="radio"]:checked + span,
+        .hypothesis-options label:has(input[type="radio"]:checked) {
+            border-color: #3498db;
+            background: #f0f8ff;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        /* Experiment Container */
+        .experiment-container {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .experiment-setup {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 30px;
+            margin-bottom: 30px;
+            min-height: 300px;
+        }
+
+        .beaker-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .beaker {
+            width: 120px;
+            height: 150px;
+            border: 4px solid #34495e;
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+            background: linear-gradient(to bottom, transparent 0%, rgba(52, 152, 219, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .naphthalene {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 40px;
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            border-radius: 10px 10px 5px 5px;
+            transition: all 0.5s ease;
+        }
+
+        .naphthalene.heating {
+            animation: dissolve 3s ease-in-out;
+        }
+
+        @keyframes dissolve {
+            0% {
+                height: 40px;
+                opacity: 1;
+            }
+            50% {
+                height: 20px;
+                opacity: 0.7;
+            }
+            100% {
+                height: 5px;
+                opacity: 0.3;
+            }
+        }
+
+        .vapor {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            opacity: 0;
+            background: radial-gradient(circle, rgba(155, 89, 182, 0.6), transparent);
+            border-radius: 50%;
+            transition: opacity 0.5s ease;
+        }
+
+        .vapor.active {
+            opacity: 1;
+            animation: vapor-rise 2s ease-in-out infinite;
+        }
+
+        @keyframes vapor-rise {
+            0% {
+                transform: translateX(-50%) translateY(0) scale(0.8);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateX(-50%) translateY(-20px) scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateX(-50%) translateY(-40px) scale(1.2);
+                opacity: 0.2;
+            }
+        }
+
+        .cold-glass {
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(to bottom, #bdc3c7, #95a5a6);
+            border: 3px solid #34495e;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .frost {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.8), rgba(174, 214, 241, 0.6));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .frost.active {
+            opacity: 1;
+            animation: frost-form 1s ease-in-out;
+        }
+
+        @keyframes frost-form {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .heater {
+            width: 80px;
+            height: 40px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .heater.active {
+            animation: heating 1s ease-in-out infinite alternate;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
+        }
+
+        @keyframes heating {
+            from {
+                transform: scale(1);
+                background: linear-gradient(45deg, #e74c3c, #c0392b);
+            }
+            to {
+                transform: scale(1.05);
+                background: linear-gradient(45deg, #ff6b6b, #e74c3c);
+            }
+        }
+
+        /* Experiment Controls */
+        .experiment-controls {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .temperature-display,
+        .time-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .temperature-display i {
+            color: #e74c3c;
+        }
+
+        .time-display i {
+            color: #3498db;
+        }
+
+        .experiment-status {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #7f8c8d;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            font-weight: 600;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Conclusion Styles */
+        .conclusion-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .hypothesis-result,
+        .learning-outcomes,
+        .real-life-examples {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .hypothesis-result h3,
+        .learning-outcomes h3,
+        .real-life-examples h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .learning-outcomes ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-outcomes li {
+            background: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .example-card {
+            background: linear-gradient(135deg, #55efc4, #00b894);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .example-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .example-card i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .btn-experiment {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            font-size: 1.1rem;
+            padding: 15px 30px;
+        }
+
+        /* Step Actions */
+        .step-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* Animation Classes */
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .animate-bounce {
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% {
+                transform: translate3d(0, 0, 0);
+            }
+            40%, 43% {
+                transform: translate3d(0, -10px, 0);
+            }
+            70% {
+                transform: translate3d(0, -5px, 0);
+            }
+            90% {
+                transform: translate3d(0, -2px, 0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .materials-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+            
+            .safety-rules {
+                grid-template-columns: 1fr;
+            }
+            
+            .experiment-setup {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .experiment-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .step-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .step-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .materials-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+            
+            .material-item {
+                padding: 15px;
+            }
+            
+            .material-item i {
+                font-size: 1.5rem;
+            }
+            
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-snowflake"></i> 5. Sınıf - Süblimleşme ve Kırağılaşma Deneyi</h1>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="step-info">Adım <span id="currentStep">1</span> / 7</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Adım 1: Giriş -->
+            <div class="step-content active" id="step1">
+                <div class="step-header">
+                    <h2><i class="fas fa-play-circle"></i> Giriş ve Amaç</h2>
+                </div>
+                <div class="content-grid">
+                    <div class="info-card">
+                        <h3>🎯 Kazanım</h3>
+                        <p>Maddenin hal değişimlerini gözlemler ve günlük hayattan örnekler verir.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🔬 Amaç</h3>
+                        <p>Katı naftalin ile süblimleşme ve kırağılaşma hal değişimlerini gözlemlemek.</p>
+                    </div>
+                </div>
+                <div class="step-actions">
+                    <button class="btn btn-primary" onclick="nextStep()">Devam Et <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Adım 2: Malzemeler -->
+            <div class="step-content" id="step2">
+                <div class="step-header">
+                    <h2><i class="fas fa-list"></i> Malzemeler</h2>
+                </div>
+                <div class="materials-grid">
+                    <div class="material-item">
+                        <i class="fas fa-cube"></i>
+                        <span>Naftalin</span>
+                    </div>
+                    <div class="material-item">
+                        <i class="fas fa-flask"></i>
+                        <span>Beher</span>
+                    </div>
+                    <div class="material-item">
+                        <i class="fas fa-fire"></i>
+                        <span>Isıtıcı</span>
+                    </div>
+                    <div class="material-item">
+                        <i class="fas fa-snowflake"></i>
+                        <span>Soğuk Cam</span>
+                    </div>
+                    <div class="material-item">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span>Termometre</span>
+                    </div>
+                    <div class="material-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Kronometre</span>
+                    </div>
+                </div>
+                <div class="step-actions">
+                    <button class="btn btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Geri</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Devam Et <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Adım 3: Güvenlik -->
+            <div class="step-content" id="step3">
+                <div class="step-header">
+                    <h2><i class="fas fa-shield-alt"></i> Güvenlik Kuralları</h2>
+                </div>
+                <div class="safety-rules">
+                    <div class="safety-item">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Naftalin buharını solumayın</span>
+                    </div>
+                    <div class="safety-item">
+                        <i class="fas fa-hand-paper"></i>
+                        <span>Sıcak yüzeylere dokunmayın</span>
+                    </div>
+                    <div class="safety-item">
+                        <i class="fas fa-eye"></i>
+                        <span>Koruyucu gözlük takın</span>
+                    </div>
+                    <div class="safety-item">
+                        <i class="fas fa-wind"></i>
+                        <span>Havalandırılmış yerde çalışın</span>
+                    </div>
+                </div>
+                <div class="safety-check">
+                    <label>
+                        <input type="checkbox" id="safetyCheck"> Güvenlik kurallarını okudum ve anladım
+                    </label>
+                </div>
+                <div class="step-actions">
+                    <button class="btn btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Geri</button>
+                    <button class="btn btn-primary" id="safetyNextBtn" onclick="nextStep()" disabled>Devam Et <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Adım 4: Hipotez -->
+            <div class="step-content" id="step4">
+                <div class="step-header">
+                    <h2><i class="fas fa-lightbulb"></i> Hipotez Oluşturma</h2>
+                </div>
+                <div class="hypothesis-section">
+                    <p class="question">🤔 Sizce naftalin ısıtıldığında ne olacak?</p>
+                    <div class="hypothesis-options">
+                        <label>
+                            <input type="radio" name="hypothesis" value="erir"> Önce eriyecek, sonra buharlaşacak
+                        </label>
+                        <label>
+                            <input type="radio" name="hypothesis" value="sublimleşir"> Doğrudan katıdan gaza geçecek (süblimleşecek)
+                        </label>
+                        <label>
+                            <input type="radio" name="hypothesis" value="değişmez"> Hiçbir değişiklik olmayacak
+                        </label>
+                    </div>
+                </div>
+                <div class="step-actions">
+                    <button class="btn btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Geri</button>
+                    <button class="btn btn-primary" id="hypothesisNextBtn" onclick="nextStep()" disabled>Devam Et <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Adım 5: Deney Simülasyonu -->
+            <div class="step-content" id="step5">
+                <div class="step-header">
+                    <h2><i class="fas fa-flask"></i> Deney Simülasyonu</h2>
+                </div>
+                <div class="experiment-container">
+                    <div class="experiment-setup">
+                        <div class="beaker-container">
+                            <div class="beaker">
+                                <div class="naphthalene" id="naphthalene"></div>
+                                <div class="vapor" id="vapor"></div>
+                            </div>
+                            <div class="cold-glass" id="coldGlass">
+                                <span>Soğuk Cam</span>
+                                <div class="frost" id="frost"></div>
+                            </div>
+                        </div>
+                        <div class="heater" id="heater">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="experiment-controls">
+                        <div class="temperature-display">
+                            <i class="fas fa-thermometer-half"></i>
+                            <span>Sıcaklık: </span>
+                            <span id="temperature">25</span>°C
+                        </div>
+                        <div class="time-display">
+                            <i class="fas fa-clock"></i>
+                            <span>Süre: </span>
+                            <span id="time">0</span> dakika
+                        </div>
+                        <button class="btn btn-experiment" id="startExperiment" onclick="startExperiment()">
+                            <i class="fas fa-play"></i> Deneyi Başlat
+                        </button>
+                    </div>
+
+                    <div class="experiment-status" id="experimentStatus">
+                        Deneyi başlatmak için butona basın
+                    </div>
+                </div>
+                <div class="step-actions">
+                    <button class="btn btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Geri</button>
+                    <button class="btn btn-primary" id="experimentNextBtn" onclick="nextStep()" disabled>Devam Et <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Adım 6: Gözlemler -->
+            <div class="step-content" id="step6">
+                <div class="step-header">
+                    <h2><i class="fas fa-eye"></i> Gözlemler ve Kayıt</h2>
+                </div>
+                <div class="observations-container">
+                    <table class="data-table" id="observationTable">
+                        <thead>
+                            <tr>
+                                <th>Süre (dk)</th>
+                                <th>Sıcaklık (°C)</th>
+                                <th>Gözlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="observationData">
+                            <!-- Veriler JavaScript ile eklenecek -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="step-actions">
+                    <button class="btn btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Geri</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Devam Et <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Adım 7: Sonuç -->
+            <div class="step-content" id="step7">
+                <div class="step-header">
+                    <h2><i class="fas fa-check-circle"></i> Sonuç ve Değerlendirme</h2>
+                </div>
+                <div class="conclusion-container">
+                    <div class="hypothesis-result">
+                        <h3>🧠 Hipotez Kontrolü</h3>
+                        <div id="hypothesisResult"></div>
+                    </div>
+                    
+                    <div class="learning-outcomes">
+                        <h3>📚 Öğrendiklerimiz</h3>
+                        <ul>
+                            <li><strong>Süblimleşme:</strong> Katı maddenin doğrudan gaza dönüşmesi</li>
+                            <li><strong>Kırağılaşma:</strong> Gazın doğrudan katıya dönüşmesi</li>
+                            <li><strong>Hal Değişimi:</strong> Sıcaklığa bağlı fiziksel değişim</li>
+                            <li><strong>Günlük Örnek:</strong> Naftalin, kar-buz süblimleşmesi</li>
+                        </ul>
+                    </div>
+
+                    <div class="real-life-examples">
+                        <h3>🌍 Günlük Hayattan Örnekler</h3>
+                        <div class="examples-grid">
+                            <div class="example-card">
+                                <i class="fas fa-snowflake"></i>
+                                <span>Kuru buzun buharlaşması</span>
+                            </div>
+                            <div class="example-card">
+                                <i class="fas fa-tshirt"></i>
+                                <span>Dolaptaki naftalin</span>
+                            </div>
+                            <div class="example-card">
+                                <i class="fas fa-mountain"></i>
+                                <span>Kar ve buz süblimleşmesi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-actions">
+                    <button class="btn btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Geri</button>
+                    <button class="btn btn-success" onclick="restartExperiment()"><i class="fas fa-redo"></i> Deneyi Tekrarla</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Global değişkenler
+        let currentStep = 1;
+        const totalSteps = 7;
+        let experimentRunning = false;
+        let experimentData = [];
+        let startTime = Date.now();
+        let temperature = 25;
+        let timeElapsed = 0;
+        let selectedHypothesis = '';
+        let experimentInterval;
+
+        // Sayfa yüklendiğinde çalışacak fonksiyonlar
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupEventListeners();
+        });
+
+        // Uygulama başlatma
+        function initializeApp() {
+            updateProgressBar();
+            updateStepDisplay();
+            showStep(1);
+        }
+
+        // Event listener'ları kurma
+        function setupEventListeners() {
+            // Güvenlik checkbox kontrolü
+            const safetyCheck = document.getElementById('safetyCheck');
+            const safetyNextBtn = document.getElementById('safetyNextBtn');
+            
+            if (safetyCheck && safetyNextBtn) {
+                safetyCheck.addEventListener('change', function() {
+                    safetyNextBtn.disabled = !this.checked;
+                });
+            }
+
+            // Hipotez seçimi kontrolü
+            const hypothesisInputs = document.querySelectorAll('input[name="hypothesis"]');
+            const hypothesisNextBtn = document.getElementById('hypothesisNextBtn');
+            
+            hypothesisInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    selectedHypothesis = this.value;
+                    if (hypothesisNextBtn) {
+                        hypothesisNextBtn.disabled = false;
+                    }
+                });
+            });
+
+            // Klavye navigasyonu
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft' && currentStep > 1) {
+                    prevStep();
+                } else if (e.key === 'ArrowRight' && currentStep < totalSteps) {
+                    nextStep();
+                }
+            });
+        }
+
+        // Sonraki adıma geçme
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                showStep(currentStep + 1);
+                currentStep++;
+                updateProgressBar();
+                updateStepDisplay();
+
+                if (currentStep === 7) {
+                    showHypothesisResult();
+                }
+            }
+        }
+
+        // Önceki adıma dönme
+        function prevStep() {
+            if (currentStep > 1) {
+                showStep(currentStep - 1);
+                currentStep--;
+                updateProgressBar();
+                updateStepDisplay();
+            }
+        }
+
+        // Belirtilen adımı gösterme
+        function showStep(stepNumber) {
+            const allSteps = document.querySelectorAll('.step-content');
+            allSteps.forEach(step => {
+                step.classList.remove('active');
+            });
+
+            const targetStep = document.getElementById(`step${stepNumber}`);
+            if (targetStep) {
+                targetStep.classList.add('active');
+            }
+        }
+
+        // Progress bar güncelleme
+        function updateProgressBar() {
+            const progressFill = document.getElementById('progressFill');
+            if (progressFill) {
+                const percentage = (currentStep / totalSteps) * 100;
+                progressFill.style.width = `${percentage}%`;
+            }
+        }
+
+        // Adım bilgisi güncelleme
+        function updateStepDisplay() {
+            const stepDisplay = document.getElementById('currentStep');
+            if (stepDisplay) {
+                stepDisplay.textContent = currentStep;
+            }
+        }
+
+        // Deneyi başlatma
+        function startExperiment() {
+            if (experimentRunning) return;
+
+            experimentRunning = true;
+            startTime = Date.now();
+            timeElapsed = 0;
+            temperature = 25;
+            experimentData = [];
+
+            const startBtn = document.getElementById('startExperiment');
+            const naphthalene = document.getElementById('naphthalene');
+            const vapor = document.getElementById('vapor');
+            const heater = document.getElementById('heater');
+            const coldGlass = document.getElementById('coldGlass');
+            const frost = document.getElementById('frost');
+            const experimentNextBtn = document.getElementById('experimentNextBtn');
+            const temperatureDisplay = document.getElementById('temperature');
+            const timeDisplay = document.getElementById('time');
+            const statusDisplay = document.getElementById('experimentStatus');
+
+            if (startBtn) {
+                startBtn.disabled = true;
+                startBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deney Çalışıyor...';
+            }
+
+            if (heater) {
+                heater.classList.add('active');
+            }
+
+            experimentInterval = setInterval(() => {
+                timeElapsed++;
+                
+                if (timeDisplay) timeDisplay.textContent = timeElapsed;
+                
+                if (timeElapsed <= 3) {
+                    temperature = 25 + (timeElapsed * 25);
+                    updateExperimentStatus('Naftalin ısınıyor...', statusDisplay);
+                    
+                } else if (timeElapsed <= 6) {
+                    temperature = 100 + ((timeElapsed - 3) * 10);
+                    updateExperimentStatus('Naftalin süblimleşmeye başlıyor!', statusDisplay);
+                    
+                    if (timeElapsed === 4) {
+                        if (naphthalene) naphthalene.classList.add('heating');
+                    }
+                    
+                } else if (timeElapsed <= 10) {
+                    temperature = 130 + ((timeElapsed - 6) * 5);
+                    updateExperimentStatus('Süblimleşme aktif! Buhar oluşuyor.', statusDisplay);
+                    
+                    if (timeElapsed === 7) {
+                        if (vapor) vapor.classList.add('active');
+                    }
+                    
+                } else if (timeElapsed <= 13) {
+                    temperature = 150 - ((timeElapsed - 10) * 10);
+                    updateExperimentStatus('Soğuk camda kırağılaşma başlıyor!', statusDisplay);
+                    
+                    if (timeElapsed === 11) {
+                        if (frost) frost.classList.add('active');
+                    }
+                    
+                } else {
+                    finishExperiment();
+                    return;
+                }
+
+                if (temperatureDisplay) temperatureDisplay.textContent = Math.round(temperature);
+                
+                recordObservation(timeElapsed, Math.round(temperature));
+                
+            }, 1000);
+        }
+
+        // Deney durumu güncelleme
+        function updateExperimentStatus(message, statusElement) {
+            if (statusElement) {
+                statusElement.textContent = message;
+                statusElement.classList.add('animate-pulse');
+                setTimeout(() => {
+                    statusElement.classList.remove('animate-pulse');
+                }, 1000);
+            }
+        }
+
+        // Gözlem kaydı
+        function recordObservation(time, temp) {
+            let observation = '';
+            
+            if (time <= 3) {
+                observation = 'Naftalin ısınıyor, henüz değişim yok';
+            } else if (time <= 6) {
+                observation = 'Naftalin küçülmeye başlıyor';
+            } else if (time <= 10) {
+                observation = 'Naftalin buharlaşıyor, beyaz buhar görülüyor';
+            } else if (time <= 13) {
+                observation = 'Soğuk camda beyaz kristaller oluşuyor';
+            } else {
+                observation = 'Süblimleşme ve kırağılaşma tamamlandı';
+            }
+
+            if (time % 2 === 0 || time >= 13) {
+                experimentData.push({
+                    time: time,
+                    temperature: temp,
+                    observation: observation
+                });
+                
+                updateObservationTable();
+            }
+        }
+
+        // Gözlem tablosunu güncelleme
+        function updateObservationTable() {
+            const tableBody = document.getElementById('observationData');
+            if (!tableBody) return;
+
+            tableBody.innerHTML = '';
+            
+            experimentData.forEach(data => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${data.time}</td>
+                    <td>${data.temperature}</td>
+                    <td>${data.observation}</td>
+                `;
+                tableBody.appendChild(row);
+                
+                row.style.opacity = '0';
+                row.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    row.style.transition = 'all 0.5s ease';
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        }
+
+        // Deneyi bitirme
+        function finishExperiment() {
+            experimentRunning = false;
+            clearInterval(experimentInterval);
+
+            const startBtn = document.getElementById('startExperiment');
+            const experimentNextBtn = document.getElementById('experimentNextBtn');
+            const statusDisplay = document.getElementById('experimentStatus');
+            const heater = document.getElementById('heater');
+
+            if (startBtn) {
+                startBtn.innerHTML = '<i class="fas fa-check"></i> Deney Tamamlandı';
+                startBtn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+            }
+
+            if (experimentNextBtn) {
+                experimentNextBtn.disabled = false;
+                experimentNextBtn.classList.add('animate-bounce');
+            }
+
+            if (statusDisplay) {
+                statusDisplay.textContent = '🎉 Deney başarıyla tamamlandı! Süblimleşme ve kırağılaşma gözlemlendi.';
+                statusDisplay.style.color = '#27ae60';
+                statusDisplay.style.fontWeight = 'bold';
+            }
+
+            if (heater) {
+                heater.classList.remove('active');
+            }
+
+            playSuccessSound();
+        }
+
+        // Başarı sesi çalma
+        function playSuccessSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1);
+                oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2);
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            } catch (e) {
+                console.log('Ses çalınamadı:', e);
+            }
+        }
+
+        // Hipotez sonucunu gösterme
+        function showHypothesisResult() {
+            const resultDiv = document.getElementById('hypothesisResult');
+            if (!resultDiv) return;
+
+            let resultHTML = '';
+            const correctAnswer = 'sublimleşir';
+
+            if (selectedHypothesis === correctAnswer) {
+                resultHTML = `
+                    <div style="background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h4><i class="fas fa-check-circle"></i> Tebrikler! Hipoteziniz Doğru</h4>
+                        <p>Naftalin gerçekten de doğrudan katıdan gaza geçti (süblimleşti). Bu, bazı maddelerin erime noktasına ulaşmadan doğrudan buharlaşabildiğini gösterir.</p>
+                    </div>
+                `;
+            } else {
+                resultHTML = `
+                    <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h4><i class="fas fa-times-circle"></i> Hipoteziniz Yanlış</h4>
+                        <p><strong>Seçiminiz:</strong> ${getHypothesisText(selectedHypothesis)}</p>
+                        <p><strong>Doğru Cevap:</strong> Naftalin doğrudan katıdan gaza geçti (süblimleşti)</p>
+                        <p>Bu normal! Bilim öğrenme sürecidir. Şimdi doğru cevabı öğrendiniz.</p>
+                    </div>
+                `;
+            }
+
+            resultDiv.innerHTML = resultHTML;
+            
+            resultDiv.style.opacity = '0';
+            resultDiv.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                resultDiv.style.transition = 'all 0.5s ease';
+                resultDiv.style.opacity = '1';
+                resultDiv.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        // Hipotez metni alma
+        function getHypothesisText(value) {
+            switch(value) {
+                case 'erir':
+                    return 'Önce eriyecek, sonra buharlaşacak';
+                case 'sublimleşir':
+                    return 'Doğrudan katıdan gaza geçecek (süblimleşecek)';
+                case 'değişmez':
+                    return 'Hiçbir değişiklik olmayacak';
+                default:
+                    return 'Belirtilmemiş';
+            }
+        }
+
+        // Deneyi yeniden başlatma
+        function restartExperiment() {
+            currentStep = 1;
+            experimentRunning = false;
+            experimentData = [];
+            temperature = 25;
+            timeElapsed = 0;
+            selectedHypothesis = '';
+            
+            if (experimentInterval) {
+                clearInterval(experimentInterval);
+            }
+
+            resetExperimentUI();
+            
+            showStep(1);
+            updateProgressBar();
+            updateStepDisplay();
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Deney UI'sini sıfırlama
+        function resetExperimentUI() {
+            const safetyCheck = document.getElementById('safetyCheck');
+            if (safetyCheck) safetyCheck.checked = false;
+
+            const hypothesisInputs = document.querySelectorAll('input[name="hypothesis"]');
+            hypothesisInputs.forEach(input => input.checked = false);
+
+            const safetyNextBtn = document.getElementById('safetyNextBtn');
+            if (safetyNextBtn) safetyNextBtn.disabled = true;
+
+            const hypothesisNextBtn = document.getElementById('hypothesisNextBtn');
+            if (hypothesisNextBtn) hypothesisNextBtn.disabled = true;
+
+            const experimentNextBtn = document.getElementById('experimentNextBtn');
+            if (experimentNextBtn) {
+                experimentNextBtn.disabled = true;
+                experimentNextBtn.classList.remove('animate-bounce');
+            }
+
+            const startBtn = document.getElementById('startExperiment');
+            if (startBtn) {
+                startBtn.disabled = false;
+                startBtn.innerHTML = '<i class="fas fa-play"></i> Deneyi Başlat';
+                startBtn.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+            }
+
+            const animatedElements = document.querySelectorAll('.heating, .active');
+            animatedElements.forEach(element => {
+                element.classList.remove('heating', 'active');
+            });
+
+            const temperatureDisplay = document.getElementById('temperature');
+            const timeDisplay = document.getElementById('time');
+            const statusDisplay = document.getElementById('experimentStatus');
+
+            if (temperatureDisplay) temperatureDisplay.textContent = '25';
+            if (timeDisplay) timeDisplay.textContent = '0';
+            if (statusDisplay) {
+                statusDisplay.textContent = 'Deneyi başlatmak için butona basın';
+                statusDisplay.style.color = '#7f8c8d';
+                statusDisplay.style.fontWeight = '600';
+            }
+
+            const tableBody = document.getElementById('observationData');
+            if (tableBody) tableBody.innerHTML = '';
+        }
+
+        // Error handling
+        window.addEventListener('error', function(e) {
+            console.error('Bir hata oluştu:', e.error);
+            
+            const errorDiv = document.createElement('div');
+            errorDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #e74c3c;
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+                z-index: 1000;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            `;
+            errorDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Bir hata oluştu. Sayfayı yenileyin.';
+            
+            document.body.appendChild(errorDiv);
+            
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 5000);
+        });
+
+        console.log('🧪 5. Sınıf Süblimleşme Deneyi Simülasyonu');
+        console.log('📚 Fen Bilimleri Laboratuvarı - İnteraktif Öğrenme');
+        console.log('🚀 Tek dosya formatında GitHub Pages için optimize edildi');
+    </script>
+</body>
+</html>
+                
